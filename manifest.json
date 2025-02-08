@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "ORGINALtest",
+    "name": "Quickchrome",
     "version": "1.0",
     "description": "Quick access to your frequently used links and workspaces",
     "permissions": [
