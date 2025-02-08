@@ -17,6 +17,7 @@ const state = {
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
     setupEventListeners();
+    setupSaveHandlers();
     loadStoredData();
 });
 
@@ -59,9 +60,6 @@ function setupEventListeners() {
         btn.addEventListener('click', closeAllModals);
     });
 
-    // Save buttons
-    setupSaveHandlers();
-
     // Search functionality
     document.getElementById('searchInput').addEventListener('input', handleSearch);
 
@@ -75,18 +73,12 @@ function setupEventListeners() {
 
 // Navigation Handler
 function handleNavigation(navItem) {
-    // Remove active class from all items
     document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('active');
     });
     
-    // Add active class to clicked item
     navItem.classList.add('active');
-    
-    // Update active section
     state.activeSection = navItem.dataset.section;
-    
-    // Load section content
     loadSectionContent(state.activeSection);
 }
 
@@ -101,8 +93,8 @@ function loadSectionContent(section) {
 
 // Render Section Content
 function renderSectionContent(container, section, items) {
-    container.innerHTML = ''; // Clear existing content
-    
+    container.innerHTML = '';
+
     if (items.length === 0) {
         container.innerHTML = `
             <div class="empty-state">
@@ -113,7 +105,6 @@ function renderSectionContent(container, section, items) {
         return;
     }
 
-    // Create appropriate content based on section
     switch (section) {
         case 'allLinks':
             renderLinks(container, items);
@@ -121,31 +112,52 @@ function renderSectionContent(container, section, items) {
         case 'groupLayout':
             renderGroups(container, items);
             break;
-        // Add other section renders as needed
     }
 }
 
 // Save Handlers Setup
 function setupSaveHandlers() {
     // All Links Save Handler
-    setupModalSave('allLinksModal', () => {
-        const linkData = {
-            title: document.getElementById('linkTitle').value,
-            url: document.getElementById('linkUrl').value,
-            description: document.getElementById('linkDescription').value,
-            tags: document.getElementById('linkTags').value.split(',').map(tag => tag.trim()),
-            icon: document.getElementById('linkIcon').value || '🔗'
-        };
-        saveItem('allLinks', linkData);
-    });
+    const allLinksModal = document.getElementById('allLinksModal');
+    if (allLinksModal) {
+        const saveButton = allLinksModal.querySelector('.save-button');
+        if (saveButton) {
+            saveButton.addEventListener('click', () => {
+                // Get window settings from the feature if available
+                const windowFeature = window.linkWindowFeature;
+                const windowSettings = windowFeature ? windowFeature.getState() : null;
+
+                const linkData = {
+                    title: document.getElementById('linkTitle').value.trim(),
+                    url: document.getElementById('linkUrl').value.trim(),
+                    description: document.getElementById('linkDescription')?.value?.trim() || '',
+                    tags: document.getElementById('linkTags')?.value?.split(',').map(tag => tag.trim()) || [],
+                    icon: document.getElementById('linkIcon')?.value?.trim() || '🔗',
+                    windowSettings: windowSettings
+                };
+
+                if (!linkData.title || !linkData.url) {
+                    alert('Please enter both title and URL');
+                    return;
+                }
+
+                // Ensure URL has protocol
+                if (!linkData.url.startsWith('http://') && !linkData.url.startsWith('https://')) {
+                    linkData.url = 'https://' + linkData.url;
+                }
+
+                saveItem('allLinks', linkData);
+            });
+        }
+    }
 
     // Group Layout Save Handler
     setupModalSave('groupLayoutModal', () => {
         const groupData = {
-            name: document.getElementById('groupName').value,
-            description: document.getElementById('groupDescription').value,
-            icon: document.getElementById('groupIcon').value || '📁',
-            color: document.getElementById('groupColor').value
+            name: document.getElementById('groupName').value.trim(),
+            description: document.getElementById('groupDescription').value.trim(),
+            icon: document.getElementById('groupIcon').value.trim() || '📁',
+            color: document.getElementById('groupColor').value.trim()
         };
         saveItem('groupLayout', groupData);
     });
@@ -153,9 +165,9 @@ function setupSaveHandlers() {
     // Schedule Save Handler
     setupModalSave('scheduleModal', () => {
         const scheduleData = {
-            title: document.getElementById('scheduleTitle').value,
-            time: document.getElementById('scheduleTime').value,
-            repeat: document.getElementById('scheduleRepeat').value,
+            title: document.getElementById('scheduleTitle').value.trim(),
+            time: document.getElementById('scheduleTime').value.trim(),
+            repeat: document.getElementById('scheduleRepeat').value.trim(),
             links: getScheduleLinks()
         };
         saveItem('schedule', scheduleData);
@@ -209,7 +221,9 @@ function updateCount(section, count) {
 // Modal Handlers
 function setupModalSave(modalId, saveFunction) {
     const modal = document.getElementById(modalId);
+    if (!modal) return;
     const saveButton = modal.querySelector('.save-button');
+    if (!saveButton) return;
     saveButton.addEventListener('click', saveFunction);
 }
 
@@ -310,44 +324,100 @@ function loadStoredData() {
         });
     });
     
-    // Load initial section content
     loadSectionContent(state.activeSection);
 }
 
-// Add this function to your first file's code
+
+
 function renderLinks(container, items) {
-    container.innerHTML = ''; // Clear previous content
-    
+    container.innerHTML = '';
+
+    if (items.length === 0) {
+        container.innerHTML = `
+            <div class="empty-state">
+                <p>No links added yet</p>
+                <button class="add-new-btn" data-action="addLink">Add Your First Link</button>
+            </div>
+        `;
+        
+        const addButton = container.querySelector('.add-new-btn');
+        if (addButton) {
+            addButton.addEventListener('click', () => {
+                handleDropdownAction('addLink');
+            });
+        }
+        return;
+    }
+
     items.forEach(item => {
         const linkElement = document.createElement('div');
         linkElement.className = 'link-item';
+        
+        // Format the URL for display
+        const displayUrl = new URL(item.url).hostname;
+        
         linkElement.innerHTML = `
-            <div class="link-icon">${item.icon || '🔗'}</div>
-            <div class="link-content">
-                <a href="${item.url}" target="_blank" class="link-title">${item.title}</a>
-                <div class="link-meta">
-                    <span class="link-url">${item.url}</span>
-                    <span class="link-date">${new Date(item.createdAt).toLocaleDateString()}</span>
+            <div class="link-header">
+                <div class="link-icon">${item.icon || '🔗'}</div>
+                <div class="link-content">
+                    <a href="#" class="link-title" title="${item.title}">${item.title}</a>
+                    <div class="link-meta">
+                        <span class="link-url" title="${item.url}">${displayUrl}</span>
+                        <span class="link-date">${new Date(item.createdAt).toLocaleDateString()}</span>
+                    </div>
                 </div>
-                ${item.description ? `<p class="link-description">${item.description}</p>` : ''}
-                ${item.tags.length ? `<div class="link-tags">${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>` : ''}
+            </div>
+            
+            ${item.tags && item.tags.length ? `
+                <div class="link-tags">
+                    ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            ` : ''}
+            
+            <div class="link-actions">
+                <button class="action-button edit-link" title="Edit">✏️</button>
+                <button class="action-button delete-link" title="Delete">🗑️</button>
             </div>
         `;
+
+        // Add click handler for the entire item
+        linkElement.addEventListener('click', (e) => {
+            // Don't open the link if clicking on action buttons
+            if (e.target.closest('.link-actions')) return;
+            
+            if (window.linkWindowFeature) {
+                window.linkWindowFeature.openWindow(item);
+            } else {
+                chrome.windows.create({
+                    url: item.url,
+                    focused: true
+                });
+            }
+        });
+
+        // Add click handlers for action buttons
+        const editButton = linkElement.querySelector('.edit-link');
+        editButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Edit functionality will be implemented later
+            console.log('Edit link:', item);
+        });
+
+        const deleteButton = linkElement.querySelector('.delete-link');
+        deleteButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (confirm('Are you sure you want to delete this link?')) {
+                chrome.storage.local.get(['allLinks'], (result) => {
+                    const links = result.allLinks || [];
+                    const newLinks = links.filter(link => link.id !== item.id);
+                    chrome.storage.local.set({ allLinks: newLinks }, () => {
+                        updateCount('allLinks', newLinks.length);
+                        loadSectionContent('allLinks');
+                    });
+                });
+            }
+        });
+
         container.appendChild(linkElement);
     });
-}
-
-// Placeholder function for rendering groups - implement this
-function renderGroups(container, items) {
-    container.innerHTML = '<p>Group layout rendering is not yet implemented.</p>';
-    // Implement your group layout rendering logic here
-    // Example:
-    /*
-    items.forEach(item => {
-        const groupElement = document.createElement('div');
-        groupElement.className = 'group-item';
-        groupElement.textContent = item.name;
-        container.appendChild(groupElement);
-    });
-    */
 }
