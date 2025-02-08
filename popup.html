@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="style/firstfeature.css">
+    <link rel="stylesheet" href="style/savedlinks.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-title">
+                    <span class="brand">Orginal</span>
+                    <span class="pro-badge">PRO</span>
+                </div>
+                <button id="darkModeToggle" class="theme-toggle">🌙</button>
+            </div>
+
+            <!-- Keyboard shortcut hint -->
+            <div class="shortcut-hint">
+                <kbd>Ctrl+J</kbd> anywhere to open
+            </div>
+
+            <!-- Navigation -->
+            <div class="nav-container">
+                <!-- Quick Access Section -->
+                <div class="nav-section">
+                    <h2 class="nav-title">QUICK ACCESS</h2>
+                    <div class="nav-items">
+                        <button class="nav-item active" data-section="allLinks" data-modal="allLinksModal">
+                            <span class="nav-icon">📑</span>
+                            <span class="nav-label">All Links</span>
+                            <span class="nav-count" id="allLinksCount">0</span>
+                        </button>
+                        <button class="nav-item" data-section="groupLayout" data-modal="groupLayoutModal">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-label">Group Layout</span>
+                            <span class="nav-count" id="groupLayoutCount">0</span>
+                        </button>
+                        <button class="nav-item" data-section="schedule" data-modal="scheduleModal">
+                            <span class="nav-icon">⏰</span>
+                            <span class="nav-label">Schedule</span>
+                            <span class="nav-count" id="scheduleCount">0</span>
+                        </button>
+                        <button class="nav-item" data-section="savedWindows" data-modal="savedWindowsModal">
+                            <span class="nav-icon">💾</span>
+                            <span class="nav-label">Saved Windows</span>
+                            <span class="nav-count" id="savedWindowsCount">0</span>
+                        </button>
+                        <button class="nav-item" data-section="workspaces" data-modal="workspacesModal">
+                            <span class="nav-icon">💼</span>
+                            <span class="nav-label">Workspaces</span>
+                            <span class="nav-count" id="workspacesCount">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tools Section -->
+                <div class="nav-section">
+                    <h2 class="nav-title">TOOLS</h2>
+                    <div class="nav-items">
+                        <button class="nav-item" data-section="automations" data-modal="automationsModal">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-label">Automations</span>
+                            <span class="beta-badge">BETA</span>
+                        </button>
+                        <button class="nav-item" data-section="analytics" data-modal="analyticsModal">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-label">Analytics</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add New Button and Dropdown -->
+            <div class="add-link-container">
+                <button id="addNewLink" class="add-link-button">
+                    <span>➕</span>
+                    <span>Add New</span>
+                </button>
+                <div class="dropdown-menu" id="addOptionsMenu">
+                    <button class="dropdown-item" data-action="addLink">
+                        <span class="item-icon">🔗</span>
+                        <span class="item-text">Add Quick Link</span>
+                    </button>
+                    <button class="dropdown-item" data-action="addGroup">
+                        <span class="item-icon">📁</span>
+                        <span class="item-text">Create Group</span>
+                    </button>
+                    <button class="dropdown-item" data-action="saveSession">
+                        <span class="item-icon">💾</span>
+                        <span class="item-text">Save Current Session</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="searchInput" placeholder="Search links or type a URL to open...">
+                    <kbd class="search-shortcut">⌘K</kbd>
+                </div>
+            </div>
+
+            <!-- Dynamic Content Container -->
+            <div class="dynamic-content">
+                <!-- Content will be loaded dynamically based on selected section -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Templates -->
+    
+ <!-- All Links Modal -->
+<div id="allLinksModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add Quick Link</h3>
+            <button class="close-modal">✕</button>
+        </div>
+        <div class="modal-body">
+            <!-- URL Input Section -->
+            <section class="input-section">
+                <div class="form-group">
+                    <label for="linkTitle">Title</label>
+                    <input type="text" id="linkTitle" class="url-input" placeholder="Enter title">
+                </div>
+                <div class="form-group">
+                    <label for="linkUrl">URL</label>
+                    <input type="url" id="linkUrl" class="url-input" placeholder="Enter URL" value="https://www.google.com">
+                </div>
+            </section>
+
+            <!-- Window Position Section -->
+            <section class="position-section">
+                <div class="form-group">
+                    <label>Window Position</label>
+                    <div class="button-group" id="positionButtonGroup">
+                        <button data-position="left" class="position-button active">Left</button>
+                        <button data-position="right" class="position-button">Right</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Window Size Section -->
+            <section class="size-section">
+                <div class="form-group">
+                    <label for="widthRange">Width (%)</label>
+                    <div class="size-control">
+                        <input type="range" id="widthRange" class="size-range" min="25" max="100" value="40">
+                        <input type="number" id="widthNumber" class="size-number" min="25" max="100" value="40">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="heightRange">Height (%)</label>
+                    <div class="size-control">
+                        <input type="range" id="heightRange" class="size-range" min="25" max="100" value="100">
+                        <input type="number" id="heightNumber" class="size-number" min="25" max="100" value="100">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section class="preview-section">
+                <label>Window Layout Preview</label>
+                <div class="preview-workspace">
+                    <div class="grid-overlay">
+                        <div class="grid-column"><div class="grid-label">0%</div></div>
+                        <div class="grid-column"><div class="grid-label">25%</div></div>
+                        <div class="grid-column"><div class="grid-label">50%</div></div>
+                        <div class="grid-column"><div class="grid-label">75%</div></div>
+                        <div class="grid-column"><div class="grid-label">100%</div></div>
+                    </div>
+                    
+                    <div class="window preview-window">
+                        <div class="window-header">
+                            <span class="preview-window-title">Window</span>
+                        </div>
+                        <div class="window-content"></div>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="modal-footer">
+            <div class="button-group">
+                <button class="cancel-button">Cancel</button>
+                <button class="save-button">Save Link</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Group Layout Modal -->
+    <div id="groupLayoutModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Group</h3>
+                <button class="close-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="groupName">Group Name</label>
+                    <input type="text" id="groupName" placeholder="Enter group name">
+                </div>
+                <div class="form-group">
+                    <label for="groupIcon">Group Icon</label>
+                    <input type="text" id="groupIcon" placeholder="Enter emoji or icon">
+                </div>
+                <div class="form-group">
+                    <label for="groupDescription">Description</label>
+                    <textarea id="groupDescription" placeholder="Enter group description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="groupColor">Group Color</label>
+                    <input type="color" id="groupColor" value="#4A90E2">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-button">Cancel</button>
+                <button class="save-button">Create Group</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Modal -->
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Schedule</h3>
+                <button class="close-modal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="scheduleTitle">Title</label>
+                    <input type="text" id="scheduleTitle" placeholder="Enter schedule title">
+                </div>
+                <div class="form-group">
+                    <label for="scheduleTime">Time</label>
+                    <input type="datetime-local" id="scheduleTime">
+                </div>
+                <div class="form-group">
+                    <label for="scheduleRepeat">Repeat</label>
+                    <select id="scheduleRepeat">
+                        <option value="never">Never</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="scheduleLinks">Links to Open</label>
+                    <div id="scheduleLinks" class="links-container">
+                        <!-- Dynamic link inputs will be added here -->
+                    </div>
+                    <button class="add-link-btn">+ Add Link</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-button">Cancel</button>
+                <button class="save-button">Save Schedule</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Saved Windows Modal -->
+    <div id="savedWindowsModal" class="modal">
+        <!-- Similar structure to other modals -->
+    </div>
+
+    <!-- Workspaces Modal -->
+    <div id="workspacesModal" class="modal">
+        <!-- Similar structure to other modals -->
+    </div>
+
+    <!-- Automations Modal -->
+    <div id="automationsModal" class="modal">
+        <!-- Similar structure to other modals -->
+    </div>
+
+    <!-- Analytics Modal -->
+    <div id="analyticsModal" class="modal">
+        <!-- Similar structure to other modals -->
+    </div>
+
+    <script src="popup.js"></script>
+    <script src="features/firstfeature.js"></script>
+</body>
+</html>
