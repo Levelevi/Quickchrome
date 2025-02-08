@@ -11,7 +11,7 @@
       "system.display"
     ],
     "action": {
-      "default_popup": "popup/popup.html?mode=popup"
+      "default_popup": "popup.html?mode=popup"
     },
     "background": {
       "service_worker": "background.js"

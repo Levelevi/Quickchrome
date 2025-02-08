@@ -1,0 +1,130 @@
+/* Enhanced dark mode styles for the modal and preview */
+body.dark .modal-content {
+    background-color: #1e1e1e;
+    border: 1px solid #404040;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .modal-header {
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #404040;
+}
+
+body.dark .modal-header h3 {
+    color: #ffffff;
+}
+
+/* Input styling */
+body.dark .form-group label {
+    color: #e0e0e0;
+}
+
+body.dark .url-input {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    color: #ffffff;
+    padding: 8px 12px;
+}
+
+body.dark .url-input:focus {
+    border-color: #4d9eff;
+    box-shadow: 0 0 0 2px rgba(77, 158, 255, 0.2);
+}
+
+/* Window preview section */
+body.dark .preview-section {
+    background-color: #252525;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 16px;
+}
+
+body.dark .preview-workspace {
+    background-color: #1a1a1a;
+    border: 1px solid #404040;
+}
+
+body.dark .grid-overlay {
+    border-color: #404040;
+}
+
+body.dark .grid-column {
+    border-color: #404040;
+}
+
+body.dark .grid-label {
+    color: #808080;
+}
+
+/* Preview window */
+body.dark .preview-window {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .window-header {
+    background-color: #353535;
+    border-bottom: 1px solid #404040;
+}
+
+body.dark .preview-window-title {
+    color: #ffffff;
+}
+
+/* Position buttons */
+body.dark .position-button {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    color: #ffffff;
+}
+
+body.dark .position-button:hover {
+    background-color: #353535;
+}
+
+body.dark .position-button.active {
+    background-color: #4d9eff;
+    border-color: #4d9eff;
+}
+
+/* Range inputs */
+body.dark .size-range {
+    background-color: #2d2d2d;
+}
+
+body.dark .size-range::-webkit-slider-thumb {
+    background-color: #4d9eff;
+}
+
+body.dark .size-range::-moz-range-thumb {
+    background-color: #4d9eff;
+}
+
+body.dark .size-number {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    color: #ffffff;
+}
+
+/* Footer buttons */
+body.dark .save-button {
+    background-color: #4d9eff;
+    color: #ffffff;
+}
+
+body.dark .cancel-button {
+    background-color: #2d2d2d;
+    border: 1px solid #404040;
+    color: #ffffff;
+}
+
+/* Smooth transitions */
+.modal-content,
+.preview-workspace,
+.preview-window,
+.position-button,
+.size-range,
+.size-number {
+    transition: all 0.3s ease;
+}
