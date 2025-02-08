@@ -1,0 +1,25 @@
+{
+    "manifest_version": 3,
+    "name": "ORGINALtest",
+    "version": "1.0",
+    "description": "Quick access to your frequently used links and workspaces",
+    "permissions": [
+      "storage",
+      "tabs"
+    ],
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "commands": {
+      "_execute_action": {
+        "suggested_key": {
+          "default": "Ctrl+J",
+          "mac": "Command+J"
+        },
+        "description": "Open Quick Launch"
+      }
+    }
+  }
