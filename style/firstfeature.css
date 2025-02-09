@@ -38,7 +38,7 @@
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     width: 90%;
-    max-width: 400px;
+    max-width: 450px; /* Increased max-width for better spacing */
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
@@ -79,7 +79,7 @@
 }
 
 .modal-header h3 {
-    font-size: 16px;
+    font-size: 18px; /* Slightly larger heading */
     font-weight: 600;
     color: var(--text);
     margin: 0;
@@ -112,7 +112,7 @@
 
 /* Form Groups */
 .modal .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 24px; /* Increased spacing between form groups */
 }
 
 .modal .form-group label {
@@ -120,7 +120,14 @@
     margin-bottom: 8px;
     font-weight: 600;
     color: var(--text);
-    font-size: 14px;
+    font-size: 15px; /* Slightly larger labels */
+}
+
+/* URL Input Group  */
+.url-input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* Input Styling */
@@ -131,8 +138,9 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
     color: var(--text);
-    font-size: 14px;
+    font-size: 15px; /* Slightly larger input text */
     transition: all 0.2s ease;
+    box-sizing: border-box; /* Important for width calculations */
 }
 
 .modal .url-input:hover {
@@ -150,6 +158,29 @@
 .modal .url-input::placeholder {
     color: rgba(0, 0, 0, 0.3);
 }
+
+/* Get URL Button */
+.get-url-button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease; /* Added transform for visual feedback */
+}
+
+.get-url-button:hover {
+    background: var(--primary-hover);
+}
+
+.get-url-button:active {
+    transform: translateY(1px); /* Adds a "pressed" effect */
+}
+
+
 
 /* Position Controls */
 .modal .button-group {
@@ -170,6 +201,7 @@
     transition: all 0.2s ease;
     font-weight: 500;
     color: var(--text-secondary);
+    font-size: 14px; /* Consistent font size */
 }
 
 .modal .position-button:hover {
@@ -404,7 +436,7 @@
 
 .modal .save-button:hover {
     background: var(--primary-hover);
-    transform: translateY(-1px);
+    transform: translateY(-1px); /* Slightly lift the button on hover */
 }
 
 /* Animation */

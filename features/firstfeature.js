@@ -29,7 +29,8 @@ window.linkWindowFeature = (() => {
             heightNumberInput: document.getElementById('heightNumber'),
             previewWindow: document.querySelector('.preview-window'),
             previewWorkspace: document.querySelector('.preview-workspace'),
-            tileModeToggle: document.getElementById('tileMode')
+            tileModeToggle: document.getElementById('tileMode'),
+            fetchUrlButton: document.getElementById('fetchUrlButton') // New button
         };
 
         // Initialize window controls if elements exist
@@ -37,13 +38,29 @@ window.linkWindowFeature = (() => {
             initializeWindowControls(elements);
         }
 
-        // Auto-fill URL from active tab
+        // Add event listener to the "Fetch URL" button
+        if (elements.fetchUrlButton) {
+            elements.fetchUrlButton.addEventListener('click', fetchCurrentTabUrl);
+        }
+    }
+
+    // Fetch the URL of the current active tab
+    function fetchCurrentTabUrl() {
         if (typeof chrome !== 'undefined' && chrome.tabs) {
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-                if (tabs[0] && elements.urlAddressInput) {
-                    elements.urlAddressInput.value = tabs[0].url;
-                    if (elements.urlTitleInput && !elements.urlTitleInput.value) {
-                        elements.urlTitleInput.value = tabs[0].title || '';
+                if (tabs[0]) {
+                    const url = tabs[0].url;
+                    const title = tabs[0].title || '';
+                    const elements = {
+                        urlTitleInput: document.getElementById('linkTitle'),
+                        urlAddressInput: document.getElementById('linkUrl')
+                    };
+
+                    if (elements.urlAddressInput) {
+                        elements.urlAddressInput.value = url;
+                    }
+                    if (elements.urlTitleInput && !elements.urlTitleInput.value) { // Only set title if title is not already set
+                        elements.urlTitleInput.value = title;
                     }
                 }
             });
@@ -74,7 +91,7 @@ window.linkWindowFeature = (() => {
         });
 
         // Width controls
-        widthRangeInput.setAttribute('max', 75);
+        widthRangeInput.setAttribute('max', 80); // Changed max value
         widthRangeInput.addEventListener('input', e => {
             state.width = Number(e.target.value);
             widthNumberInput.value = state.width;
@@ -82,7 +99,7 @@ window.linkWindowFeature = (() => {
         });
 
         widthNumberInput.addEventListener('input', e => {
-            let value = Math.min(75, Math.max(25, Number(e.target.value)));
+            let value = Math.min(80, Math.max(25, Number(e.target.value)));  // Changed the condition
             state.width = value;
             widthRangeInput.value = value;
             updatePreview(previewWindow, previewWorkspace);
@@ -193,7 +210,7 @@ window.linkWindowFeature = (() => {
         const deltaX = e.clientX - state.lastX;
         const deltaY = e.clientY - state.lastY;
 
-        let newWidth = Math.max(25, Math.min(75, (previewWindow.offsetWidth + deltaX) / workspaceRect.width * 100));
+        let newWidth = Math.max(25, Math.min(80, (previewWindow.offsetWidth + deltaX) / workspaceRect.width * 100)); //Changed the width of the box
         const newHeight = Math.max(25, Math.min(100, (previewWindow.offsetHeight + deltaY) / workspaceRect.height * 100));
 
         state.width = Math.round(newWidth);

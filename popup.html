@@ -122,98 +122,100 @@
     </div>
 
     <!-- Modal Templates -->
-    <div id="allLinksModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Add Quick Link</h3>
-                <button class="close-modal">✕</button>
-            </div>
-            <div class="modal-body">
-                <!-- URL Input Section -->
-                <section class="input-section">
-                    <div class="form-group">
-                        <label for="linkTitle">Title</label>
-                        <input type="text" id="linkTitle" class="url-input" placeholder="Enter title">
-                    </div>
-                    <div class="form-group">
-                        <label for="linkUrl">URL</label>
-                        <input type="url" id="linkUrl" class="url-input" placeholder="Enter URL">
-                    </div>
-                    <div class="form-group">
-                        <label for="linkDescription">Description</label>
-                        <textarea id="linkDescription" class="url-input" placeholder="Enter description"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="linkTags">Tags</label>
-                        <input type="text" id="linkTags" class="url-input" placeholder="Enter tags (comma-separated)">
-                    </div>
-                    <div class="form-group">
-                        <label for="linkIcon">Icon (emoji)</label>
-                        <input type="text" id="linkIcon" class="url-input" placeholder="Enter an emoji">
-                    </div>
-                </section>
-    
-                <!-- Window Position Section -->
-                <section class="position-section">
-                    <div class="form-group">
-                        <label>Window Position</label>
-                        <div class="button-group" id="positionButtonGroup">
-                            <button data-position="left" class="position-button active">Left</button>
-                            <button data-position="right" class="position-button">Right</button>
-                        </div>
-                    </div>
-                </section>
-    
-                <!-- Window Size Section -->
-                <section class="size-section">
-                    <div class="form-group">
-                        <label for="widthRange">Width (%)</label>
-                        <div class="size-control">
-                            <input type="range" id="widthRange" class="size-range" min="25" max="75" value="40">
-                            <input type="number" id="widthNumber" class="size-number" min="25" max="75" value="40">
-                        </div>
-                    </div>
-    
-                    <div class="form-group">
-                        <label for="heightRange">Height (%)</label>
-                        <div class="size-control">
-                            <input type="range" id="heightRange" class="size-range" min="25" max="100" value="100">
-                            <input type="number" id="heightNumber" class="size-number" min="25" max="100" value="100">
-                        </div>
-                    </div>
-                </section>
-    
-                <!-- Preview Section -->
-                <section class="preview-section">
-                    <label>Window Layout Preview</label>
-                    <div class="preview-workspace">
-                        <div class="grid-overlay">
-                            <div class="grid-column"><div class="grid-label">0%</div></div>
-                            <div class="grid-column"><div class="grid-label">25%</div></div>
-                            <div class="grid-column"><div class="grid-label">50%</div></div>
-                            <div class="grid-column"><div class="grid-label">75%</div></div>
-                            <div class="grid-column"><div class="grid-label">100%</div></div>
-                        </div>
-                        
-                        <div class="window preview-window">
-                            <div class="window-header">
-                                <span class="preview-window-title">Window</span>
-                            </div>
-                            <div class="window-content"></div>
-                            <div class="resize-handle"></div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            <div class="modal-footer">
-                <div class="button-group">
-                    <button class="cancel-button">Cancel</button>
-                    <button class="save-button">Save Link</button>
+<div id="allLinksModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Add Quick Link</h3>
+            <button class="close-modal">✕</button>
+        </div>
+        <div class="modal-body">
+            <!-- URL Input Section -->
+            <section class="input-section">
+                <div class="form-group">
+                    <label for="linkTitle">Title</label>
+                    <input type="text" id="linkTitle" class="url-input" placeholder="Enter title">
                 </div>
+                <div class="form-group">
+                    <label for="linkUrl">URL</label>
+                    <div class="url-input-group">
+                        <input type="url" id="linkUrl" class="url-input" placeholder="Enter URL">
+                        <button id="fetchUrlButton" class="get-url-button">Get URL</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="linkDescription">Description</label>
+                    <textarea id="linkDescription" class="url-input" placeholder="Enter description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="linkTags">Tags</label>
+                    <input type="text" id="linkTags" class="url-input" placeholder="Enter tags (comma-separated)">
+                </div>
+                <div class="form-group">
+                    <label for="linkIcon">Icon (emoji)</label>
+                    <input type="text" id="linkIcon" class="url-input" placeholder="Enter an emoji">
+                </div>
+            </section>
+
+            <!-- Window Position Section -->
+            <section class="position-section">
+                <div class="form-group">
+                    <label>Window Position</label>
+                    <div class="button-group" id="positionButtonGroup">
+                        <button data-position="left" class="position-button active">Left</button>
+                        <button data-position="right" class="position-button">Right</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Window Size Section -->
+            <section class="size-section">
+                <div class="form-group">
+                    <label for="widthRange">Width (%)</label>
+                    <div class="size-control">
+                        <input type="range" id="widthRange" class="size-range" min="25" max="75" value="40">
+                        <input type="number" id="widthNumber" class="size-number" min="25" max="75" value="40">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="heightRange">Height (%)</label>
+                    <div class="size-control">
+                        <input type="range" id="heightRange" class="size-range" min="25" max="100" value="100">
+                        <input type="number" id="heightNumber" class="size-number" min="25" max="100" value="100">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preview Section -->
+            <section class="preview-section">
+                <label>Window Layout Preview</label>
+                <div class="preview-workspace">
+                    <div class="grid-overlay">
+                        <div class="grid-column"><div class="grid-label">0%</div></div>
+                        <div class="grid-column"><div class="grid-label">25%</div></div>
+                        <div class="grid-column"><div class="grid-label">50%</div></div>
+                        <div class="grid-column"><div class="grid-label">75%</div></div>
+                        <div class="grid-column"><div class="grid-label">100%</div></div>
+                    </div>
+
+                    <div class="window preview-window">
+                        <div class="window-header">
+                            <span class="preview-window-title">Window</span>
+                        </div>
+                        <div class="window-content"></div>
+                        <div class="resize-handle"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="modal-footer">
+            <div class="button-group">
+                <button class="cancel-button">Cancel</button>
+                <button class="save-button">Save Link</button>
             </div>
         </div>
     </div>
-
+</div>
     <!-- Group Layout Modal -->
     <div id="groupLayoutModal" class="modal">
         <div class="modal-content">
