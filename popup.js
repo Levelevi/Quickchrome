@@ -610,7 +610,7 @@ function showEditModal(item) {
         <input type="url" id="edit-url" placeholder="URL" value="${item.url}">
         <div class="edit-modal-buttons">
             <button onclick="hideEditModal()">Cancel</button>
-            <button class="save" onclick="saveEditedLink('${item.url}')">Save</button>
+            <button class="save" onclick="saveEditedLink(this, '${item.url}')">Save</button>
         </div>
     `;
 
@@ -630,7 +630,7 @@ function hideEditModal() {
     }
 }
 
-function saveEditedLink(originalUrl) {
+function saveEditedLink(button, originalUrl) { // Added the button parameter
     const titleInput = document.getElementById('edit-title');
     const urlInput = document.getElementById('edit-url');
 
@@ -642,13 +642,20 @@ function saveEditedLink(originalUrl) {
         return;
     }
 
+     // Disable the save button
+     button.disabled = true;
+     button.textContent = 'Saving...';
+
     chrome.storage.local.get(['allLinks'], (result) => {
         const links = result.allLinks || [];
         const index = links.findIndex(link => link.url === originalUrl);
-        
+
         if (index !== -1) {
             links[index] = { ...links[index], title: newTitle, url: newUrl };
             chrome.storage.local.set({ allLinks: links }, () => {
+                 // Re-enable the save button and restore its text
+                button.disabled = false;
+                button.textContent = 'Save';
                 hideEditModal();
                 renderLinks(document.querySelector('.shortcuts-container'), links);
             });
@@ -657,13 +664,43 @@ function saveEditedLink(originalUrl) {
 }
 
 function deleteLink(item) {
+    if (!item || !item.url) {
+        console.error('Invalid item to delete:', item);
+        return;
+    }
+
     if (confirm('Are you sure you want to delete this link?')) {
         chrome.storage.local.get(['allLinks'], (result) => {
             const links = result.allLinks || [];
-            const newLinks = links.filter(link => link.url !== item.url);
-            
+
+            // Find the exact index of the item to delete
+            const indexToDelete = links.findIndex(link =>
+                link.url === item.url && link.title === item.title
+            );
+
+            if (indexToDelete === -1) {
+                console.error('Link not found:', item);
+                return;
+            }
+
+            // Create a new array without the deleted item
+            const newLinks = [
+                ...links.slice(0, indexToDelete),
+                ...links.slice(indexToDelete + 1)
+            ];
+
+            // Save the updated links array
             chrome.storage.local.set({ allLinks: newLinks }, () => {
-                renderLinks(document.querySelector('.shortcuts-container'), newLinks);
+                if (chrome.runtime.lastError) {
+                    console.error('Error saving updated links:', chrome.runtime.lastError);
+                    return;
+                }
+
+                // Re-render only if save was successful
+                const container = document.querySelector('.shortcuts-container');
+                if (container) {
+                    renderLinks(container, newLinks);
+                }
             });
         });
     }
@@ -677,7 +714,7 @@ function renderLinks(container, items) {
 
     // Clear the container
     container.innerHTML = '';
-    
+
     const shortcutsContainer = document.createElement('div');
     shortcutsContainer.className = 'shortcuts-container';
 
@@ -693,7 +730,7 @@ function renderLinks(container, items) {
 
     const linksGrid = document.createElement('div');
     linksGrid.className = 'links-grid';
-    
+
     items.forEach(item => {
         if (!item || !item.url || !item.title) {
             console.error('Invalid item:', item);
@@ -710,7 +747,7 @@ function renderLinks(container, items) {
             console.error('Invalid URL:', item.url);
             domain = 'invalid-url';
         }
-        
+
         linkElement.innerHTML = `
             <div class="icon-wrapper">
                 <button class="icon-button">
@@ -756,7 +793,6 @@ function renderLinks(container, items) {
     shortcutsContainer.appendChild(linksGrid);
     container.appendChild(shortcutsContainer);
 }
-
 // Helper function to verify data is being loaded correctly
 function debugLinksData() {
     chrome.storage.local.get(['allLinks'], (result) => {
