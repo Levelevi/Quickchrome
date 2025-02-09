@@ -841,3 +841,156 @@
       transform: translateY(0);
   }
   }
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  .shortcuts-container {
+    padding: 16px;
+    background-color: #202124;  /* Dark background */
+}
+
+.links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    
+}
+
+.link-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 64px;
+    cursor: pointer;  /* Indicate clickability */
+    transition: background-color 0.2s ease;
+    border-radius: 8px;
+}
+
+.link-item:hover {
+    background-color: #303134; /* Slightly darker on hover */
+}
+
+.icon-wrapper {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 4px;
+}
+
+.icon-button {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #303134;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.icon-button:hover {
+    background-color: #3c4043;
+}
+
+.icon-button img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.menu-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3c4043;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.icon-wrapper:hover .menu-button {
+    opacity: 1;
+}
+
+.shortcut-label {
+    color: #e8eaed;
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Empty State Styling (Optional) */
+.empty-state {
+    padding: 20px;
+    text-align: center;
+    color: #e8eaed;
+}
+
+.empty-state p {
+    margin-bottom: 15px;
+}
+
+/* Additional styles for the group section */
+.groups-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.group-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 64px;
+    cursor: pointer; /* indicate clickability */
+    transition: background-color 0.2s ease;
+    border-radius: 8px;
+}
+
+.group-item:hover {
+    background-color: #303134;
+}
+
+
+.group-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #303134;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    font-size: 24px;          /* Adjust icon size as needed */
+    font-weight: bold;        /* Make the text bold */
+    color: #e8eaed;           /* Set text color */
+}
+
+/* Button to add shortcut */
+.icon-button[data-action="addLink"] {
+    color: #e8eaed;
+    font-size: 24px;
+}
