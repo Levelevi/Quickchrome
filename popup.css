@@ -212,7 +212,7 @@ kbd {
 .search-icon {
   position: absolute;
   left: 12px;
-  top: 50%;
+  top: 20%;
   transform: translateY(-50%);
   color: #9ca3af;
 }
@@ -450,6 +450,125 @@ kbd {
   background-color: #4f46e5;
 }
 
+/* Dark Mode Styles */
+body.dark {
+  background-color: #1f2937;
+  color: #f3f4f6;
+}
+
+body.dark .app-container {
+  background-color: #111827;
+}
+
+body.dark .sidebar {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+}
+
+body.dark .main-content {
+  background-color: #1f2937;
+}
+
+body.dark .search-container {
+  border-bottom-color: #374151;
+}
+
+body.dark #searchInput {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+body.dark #searchInput:focus {
+  border-color: #6366f1;
+}
+
+body.dark .search-shortcut {
+  background-color: #4b5563;
+  color: #e5e7eb;
+}
+
+body.dark .link-card {
+  background-color: #2d3748;
+  border-color: #4b5563;
+}
+
+body.dark .card-title {
+  color: #f3f4f6;
+}
+
+body.dark .card-description {
+  color: #9ca3af;
+}
+
+body.dark .tag {
+  background-color: #4b5563;
+  color: #e5e7eb;
+}
+
+body.dark .card-footer {
+  background-color: #374151;
+  color: #9ca3af;
+}
+
+body.dark .card-actions button {
+  color: #9ca3af;
+}
+
+body.dark .card-actions button:hover {
+  color: #f3f4f6;
+}
+
+body.dark .modal-content {
+  background-color: #2d3748;
+}
+
+body.dark .modal-header {
+  border-bottom-color: #4b5563;
+}
+
+body.dark .modal-header h3 {
+  color: #f3f4f6;
+}
+
+body.dark .close-modal {
+  color: #9ca3af;
+}
+
+body.dark .form-group label {
+  color: #e5e7eb;
+}
+
+body.dark .form-group input {
+  background-color: #374151;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+body.dark .form-group input:focus {
+  border-color: #6366f1;
+}
+
+body.dark .modal-footer {
+  border-top-color: #4b5563;
+}
+
+body.dark .cancel-button {
+  background-color: #4b5563;
+  color: #e5e7eb;
+}
+
+body.dark .cancel-button:hover {
+  background-color: #6b7280;
+}
+
+body.dark .save-button {
+  background-color: #6366f1;
+  color: #fff;
+}
+
+body.dark .save-button:hover {
+  background-color: #4f46e5;
+}
 
 /* Scrollbar Styles */
 ::-webkit-scrollbar {
@@ -467,6 +586,19 @@ kbd {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+/* Dark mode scrollbar */
+body.dark ::-webkit-scrollbar-track {
+  background: #2d3748;
+}
+
+body.dark ::-webkit-scrollbar-thumb {
+  background: #4a5568;
+}
+
+body.dark ::-webkit-scrollbar-thumb:hover {
+  background: #718096;
 }
 
 /* Animations */
@@ -518,6 +650,17 @@ kbd {
 .nav-item:hover .nav-icon {
   transform: translateX(2px);
   transition: transform 0.2s ease;
+}
+
+/* Improved focus styles for dark mode */
+body.dark .nav-item:focus,
+body.dark .add-link-button:focus,
+body.dark #searchInput:focus,
+body.dark .card-actions button:focus,
+body.dark .close-modal:focus,
+body.dark .cancel-button:focus,
+body.dark .save-button:focus {
+  outline-color: #8b5cf6;
 }
 
 /* Custom styles for specific elements */
@@ -817,5 +960,3 @@ to {
     transform: translateY(0);
 }
 }
-
-

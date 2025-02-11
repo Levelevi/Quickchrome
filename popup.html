@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="style/firstfeature.css">
     <link rel="stylesheet" href="style/savedlinks.css">
-    <link rel="stylesheet" href="darkmode/darkmode.css">
-    <link rel="stylesheet" href="foldermanagement/stylingfolder.css">
 </head>
 <body>
     <div class="app-container">
@@ -69,8 +67,8 @@
                     <h2 class="nav-title">TOOLS</h2>
                     <div class="nav-items">
                         <button class="nav-item" data-section="automations" data-modal="automationsModal">
-                            <span class="nav-icon">⚙️</span>
-                            <span class="nav-label">Automations</span>
+                            <span class="nav-icon">✨</span>
+                            <span class="nav-label">Premiumfeature</span>
                             <span class="beta-badge">BETA</span>
                         </button>
                         <button class="nav-item" data-section="analytics" data-modal="analyticsModal">
@@ -114,37 +112,7 @@
                     <kbd class="search-shortcut">⌘K</kbd>
                 </div>
             </div>
-            <div class="folder-system">
-                <div class="header-nav">
-                    <button class="back-button" id="backButton">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 18l-6-6 6-6" />
-                        </svg>
-                    </button>
-                    <div class="path-text" id="folderPath">Root</div>
-                    <!-- Tag Filter Button -->
-                    <button class="tag-filter-btn" id="tagFilterBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 3h-4l-2 3h-4L8 3H4a1 1 0 00-1 1v17a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1z"/>
-                            <path d="M12 11v6M9 14h6"/>
-                        </svg>
-                        Filter by Tags
-                    </button>
-                </div>
-                <!-- Active Tags Container -->
-                <div class="active-tags-container" id="activeTagsContainer"></div>
-            </div>
-            <div class="boxbruh">
-                <button class="create-folder-btn" id="createFolderBtn">
-                    <svg class="folder-plus-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 19h7a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-7l-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-9v9" />
-                        <path d="M16 13h-8" />
-                    </svg>
-                    <span class="create-text">Create New Folder</span>
-                </button>
-            </div>
 
-            
             <!-- Dynamic Content Container -->
             <div class="dynamic-content">
                 <!-- Content will be loaded dynamically based on selected section -->
@@ -152,242 +120,21 @@
         </div>
     </div>
 
-     <!-- Modal for creating new folder -->
-     <div class="modal" id="folderModal">
-        <div class="modal-content">
-            <h2>Create New Folder</h2>
-            <div class="input-group">
-                <label for="folderName">Folder Name</label>
-                <input type="text" id="folderName" placeholder="Enter folder name" />
-            </div>
-            
-            <!-- Make sure this tag input section exists -->
-            <div class="input-group" id="tagInputGroup">
-                <label for="folderTags">Tags (comma-separated)</label>
-                <input type="text" id="folderTags" placeholder="e.g., important, work, personal" />
-            </div>
-
-            <div class="modal-buttons">
-                <button class="cancel-button" onclick="closeModal()">Cancel</button>
-                <button class="create-button" onclick="createFolder()">Create</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Tag Filter Modal -->
-    <div class="modal" id="tagFilterModal">
-        <div class="modal-content">
-            <h2>Filter by Tags</h2>
-            <div class="search-tags">
-                <input type="text" id="tagSearch" placeholder="Search tags..." />
-            </div>
-            <div class="tags-container" id="tagsContainer">
-                <!-- Tags will be dynamically inserted here -->
-            </div>
-            <div class="modal-buttons">
-                <button class="cancel-button" onclick="closeTagModal()">Cancel</button>
-                <button class="create-button" onclick="applyTagFilter()">Apply Filters</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Tags Modal -->
-    <div class="modal" id="editTagsModal">
-        <div class="modal-content">
-            <h2>Edit Folder Tags</h2>
-            <div class="input-group">
-                <label for="editFolderTags">Tags (comma-separated)</label>
-                <input type="text" id="editFolderTags" placeholder="e.g., important, work, personal" />
-            </div>
-            <div class="modal-buttons">
-                <button class="cancel-button" onclick="closeEditTagsModal()">Cancel</button>
-                <button class="create-button" onclick="saveEditTags()">Save Tags</button>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Modal Templates -->
+    
+ <!-- All Links Modal -->
 <div id="allLinksModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Add Quick Link</h3>
-            <button class="close-modal">✕</button>
-        </div>
-        <div class="modal-body">
-            <!-- URL Input Section -->
-            <section class="input-section">
-                <div class="form-group">
-                    <label for="linkTitle">Title</label>
-                    <input type="text" id="linkTitle" class="url-input" placeholder="Enter title">
-                </div>
-                <div class="form-group">
-                    <label for="linkUrl">URL</label>
-                    <div class="url-input-group">
-                        <input type="url" id="linkUrl" class="url-input" placeholder="Enter URL">
-                        <button id="fetchUrlButton" class="get-url-button">Get URL</button>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="linkDescription">Description</label>
-                    <textarea id="linkDescription" class="url-input" placeholder="Enter description"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="linkTags">Tags</label>
-                    <input type="text" id="linkTags" class="url-input" placeholder="Enter tags (comma-separated)">
-                </div>
-                <div class="form-group">
-                    <label for="linkIcon">Icon (emoji)</label>
-                    <input type="text" id="linkIcon" class="url-input" placeholder="Enter an emoji">
-                </div>
-            </section>
-
-            <!-- Window Position Section -->
-            <section class="position-section">
-                <div class="form-group">
-                    <label>Window Position</label>
-                    <div class="button-group" id="positionButtonGroup">
-                        <button data-position="left" class="position-button active">Left</button>
-                        <button data-position="right" class="position-button">Right</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Window Size Section -->
-            <section class="size-section">
-                <div class="form-group">
-                    <label for="widthRange">Width (%)</label>
-                    <div class="size-control">
-                        <input type="range" id="widthRange" class="size-range" min="25" max="75" value="40">
-                        <input type="number" id="widthNumber" class="size-number" min="25" max="75" value="40">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="heightRange">Height (%)</label>
-                    <div class="size-control">
-                        <input type="range" id="heightRange" class="size-range" min="25" max="100" value="100">
-                        <input type="number" id="heightNumber" class="size-number" min="25" max="100" value="100">
-                    </div>
-                </div>
-            </section>
-
-            <!-- Preview Section -->
-            <section class="preview-section">
-                <label>Window Layout Preview</label>
-                <div class="preview-workspace">
-                    <div class="grid-overlay">
-                        <div class="grid-column"><div class="grid-label">0%</div></div>
-                        <div class="grid-column"><div class="grid-label">25%</div></div>
-                        <div class="grid-column"><div class="grid-label">50%</div></div>
-                        <div class="grid-column"><div class="grid-label">75%</div></div>
-                        <div class="grid-column"><div class="grid-label">100%</div></div>
-                    </div>
-
-                    <div class="window preview-window">
-                        <div class="window-header">
-                            <span class="preview-window-title">Window</span>
-                        </div>
-                        <div class="window-content"></div>
-                        <div class="resize-handle"></div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div class="modal-footer">
-            <div class="button-group">
-                <button class="cancel-button">Cancel</button>
-                <button class="save-button">Save Link</button>
-            </div>
-        </div>
-    </div>
+      <!-- Similar structure to other modals -->
 </div>
+
     <!-- Group Layout Modal -->
     <div id="groupLayoutModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Create New Group</h3>
-                <button class="close-modal">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="groupName">Group Name</label>
-                    <input type="text" id="groupName" placeholder="Enter group name">
-                </div>
-                <div class="form-group">
-                    <label for="groupIcon">Group Icon</label>
-                    <input type="text" id="groupIcon" placeholder="Enter emoji or icon">
-                </div>
-                <div class="form-group">
-                    <label for="groupDescription">Description</label>
-                    <textarea id="groupDescription" placeholder="Enter group description"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="groupColor">Group Color</label>
-                    <input type="color" id="groupColor" value="#4A90E2">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="cancel-button">Cancel</button>
-                <button class="save-button">Create Group</button>
-            </div>
-        </div>
+         <!-- Similar structure to other modals -->
     </div>
 
     <!-- Schedule Modal -->
     <div id="scheduleModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Add Schedule</h3>
-                <button class="close-modal">✕</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="scheduleTitle">Title</label>
-                    <input type="text" id="scheduleTitle" placeholder="Enter schedule title">
-                </div>
-                <div class="form-group">
-                    <label for="scheduleTime">Time</label>
-                    <input type="datetime-local" id="scheduleTime">
-                </div>
-                <div class="form-group">
-                    <label for="scheduleRepeat">Repeat</label>
-                    <select id="scheduleRepeat">
-                        <option value="never">Never</option>
-                        <option value="daily">Daily</option>
-                        <option value="weekly">Weekly</option>
-                        <option value="monthly">Monthly</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="scheduleLinks">Links to Open</label>
-                    <div id="scheduleLinks" class="links-container">
-                        <!-- Dynamic link inputs will be added here -->
-                    </div>
-                    <button class="add-link-btn">+ Add Link</button>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="cancel-button">Cancel</button>
-                <button class="save-button">Save Schedule</button>
-            </div>
-        </div>
+        <!-- Similar structure to other modals -->
     </div>
 
     <!-- Saved Windows Modal -->
@@ -401,7 +148,7 @@
     </div>
 
     <!-- Automations Modal -->
-    <div id="automationsModal" class="modal">
+    <div id="premiumfeature" class="modal">
         <!-- Similar structure to other modals -->
     </div>
 
@@ -409,10 +156,8 @@
     <div id="analyticsModal" class="modal">
         <!-- Similar structure to other modals -->
     </div>
-    <!-- <script src="foldermanagement/folderfileone.js"></script>
-    <script src="foldermanagement/folderfiletwo.js"></script> -->
+
     <script src="popup.js"></script>
     <script src="features/firstfeature.js"></script>
-    <script src="darkmode/darkmode.js"></script>
 </body>
 </html>
