@@ -1,0 +1,125 @@
+
+
+
+.folder-system {
+    padding: 12px;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+  }
+  
+  /* Navigation Header */
+  .header-nav {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .back-button {
+    padding: 4px;
+    border: none;
+    background: transparent;
+    border-radius: 9999px;
+    cursor: pointer;
+    color: #6b7280;
+    display: none; /* Hidden by default, shown via JS when inside a folder */
+  }
+  
+  .back-button:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .path-text {
+    font-size: 12px;
+    color: #6b7280;
+  }
+  
+  /* Folder Grid */
+  .folder-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+    padding: 8px;
+  }
+  
+  /* Create Folder Button */
+  .create-folder-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border: 2px dashed #e5e7eb;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+    min-height: 120px;
+    transition: all 0.2s;
+  }
+  
+  .create-folder-btn:hover {
+    border-color: #7c3aed;
+    background-color: #f5f3ff;
+  }
+  
+  .folder-plus-icon {
+    color: #9ca3af;
+    margin-bottom: 4px;
+  }
+  
+  .create-text {
+    font-size: 12px;
+    color: #6b7280;
+  }
+  
+  /* Folder Card */
+  .folder-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    cursor: pointer;
+    min-height: 120px;
+    transition: all 0.2s;
+  }
+  
+  .folder-card:hover {
+    border-color: #7c3aed;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .folder-icon {
+    color: #7c3aed;
+    margin-bottom: 4px;
+  }
+  
+  .folder-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #374151;
+    text-align: center;
+    margin-bottom: 2px;
+  }
+  
+  .folder-count {
+    font-size: 10px;
+    color: #6b7280;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 640px) {
+    .folder-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 6px;
+    }
+  
+    .folder-card, .create-folder-btn {
+      min-height: 100px;
+      padding: 8px;
+    }
+  }
