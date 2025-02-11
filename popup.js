@@ -368,6 +368,28 @@ function loadStoredData() {
     loadSectionContent(state.activeSection);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
 // Style definitions
 const style = document.createElement('style');
 style.textContent = `
@@ -805,4 +827,4 @@ window.hideEditModal = hideEditModal;
 window.saveEditedLink = saveEditedLink;
 
 // Call this function to check if data exists
-debugLinksData();
+debugLinksData(); */

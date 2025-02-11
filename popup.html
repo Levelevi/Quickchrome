@@ -10,8 +10,7 @@
     <link rel="stylesheet" href="style/firstfeature.css">
     <link rel="stylesheet" href="style/savedlinks.css">
     <link rel="stylesheet" href="darkmode/darkmode.css">
-    <link rel="stylesheet" href="style/box.css">
-    <link rel="stylesheet" href="style/">
+    <link rel="stylesheet" href="foldermanagement/stylingfolder.css">
 </head>
 <body>
     <div class="app-container">
@@ -115,50 +114,89 @@
                     <kbd class="search-shortcut">⌘K</kbd>
                 </div>
             </div>
-            <div class="folder-grid" id="folderGrid">
-                <!-- Create New Folder Button -->
-                <button class="create-folder-btn" id="createFolderBtn">
-                    <svg class="folder-plus-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 19h7a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-7l-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-9v9" />
-                        <path d="M16 13h-8" />
-                    </svg>
-                    <span class="create-text">Create New Folder</span>
-                </button>
+            <div class="folder-system">
+                <div class="header-nav">
+                    <button class="back-button" id="backButton">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6" />
+                        </svg>
+                    </button>
+                    <div class="path-text" id="folderPath">Root</div>
+                    <!-- Tag Filter Button -->
+                    <button class="tag-filter-btn" id="tagFilterBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 3h-4l-2 3h-4L8 3H4a1 1 0 00-1 1v17a1 1 0 001 1h16a1 1 0 001-1V4a1 1 0 00-1-1z"/>
+                            <path d="M12 11v6M9 14h6"/>
+                        </svg>
+                        Filter by Tags
+                    </button>
+                </div>
     
+                <!-- Active Tags Container -->
+                <div class="active-tags-container" id="activeTagsContainer"></div>
             </div>
+
+            
             <!-- Dynamic Content Container -->
             <div class="dynamic-content">
                 <!-- Content will be loaded dynamically based on selected section -->
             </div>
         </div>
     </div>
-    <!-- FOLDER MODEL -->
 
+     <!-- Modal for creating new folder -->
+     <div class="modal" id="folderModal">
+        <div class="modal-content">
+            <h2>Create New Folder</h2>
+            <div class="input-group">
+                <label for="folderName">Folder Name</label>
+                <input type="text" id="folderName" placeholder="Enter folder name" />
+            </div>
+            
+            <!-- Make sure this tag input section exists -->
+            <div class="input-group" id="tagInputGroup">
+                <label for="folderTags">Tags (comma-separated)</label>
+                <input type="text" id="folderTags" placeholder="e.g., important, work, personal" />
+            </div>
 
+            <div class="modal-buttons">
+                <button class="cancel-button" onclick="closeModal()">Cancel</button>
+                <button class="create-button" onclick="createFolder()">Create</button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Tag Filter Modal -->
+    <div class="modal" id="tagFilterModal">
+        <div class="modal-content">
+            <h2>Filter by Tags</h2>
+            <div class="search-tags">
+                <input type="text" id="tagSearch" placeholder="Search tags..." />
+            </div>
+            <div class="tags-container" id="tagsContainer">
+                <!-- Tags will be dynamically inserted here -->
+            </div>
+            <div class="modal-buttons">
+                <button class="cancel-button" onclick="closeTagModal()">Cancel</button>
+                <button class="create-button" onclick="applyTagFilter()">Apply Filters</button>
+            </div>
+        </div>
+    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!-- Edit Tags Modal -->
+    <div class="modal" id="editTagsModal">
+        <div class="modal-content">
+            <h2>Edit Folder Tags</h2>
+            <div class="input-group">
+                <label for="editFolderTags">Tags (comma-separated)</label>
+                <input type="text" id="editFolderTags" placeholder="e.g., important, work, personal" />
+            </div>
+            <div class="modal-buttons">
+                <button class="cancel-button" onclick="closeEditTagsModal()">Cancel</button>
+                <button class="create-button" onclick="saveEditTags()">Save Tags</button>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -363,7 +401,8 @@
     <div id="analyticsModal" class="modal">
         <!-- Similar structure to other modals -->
     </div>
-
+    <script src="foldermanagement/folderfileone.js"></script>
+    <script src="foldermanagement/folderfiletwo.js"></script>
     <script src="popup.js"></script>
     <script src="features/firstfeature.js"></script>
     <script src="darkmode/darkmode.js"></script>

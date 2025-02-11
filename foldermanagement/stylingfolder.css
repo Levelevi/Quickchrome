@@ -1,0 +1,141 @@
+/* Tag Filter Button */
+.tag-filter-btn {
+    margin-left: auto;
+    padding: 8px 16px;
+    background-color: #f3f4f6;
+    border: none;
+    border-radius: 6px;
+    color: #4b5563;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 16px; /* Added space from the right side */
+}
+
+.tag-filter-btn:hover {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.tag-filter-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Responsive Design for Tag Filter Button */
+@media (max-width: 640px) {
+    .tag-filter-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+        margin-right: 8px; /* Adjusted space from the right side for smaller screens */
+    }
+}
+
+
+
+
+
+/* Back Button Styles */
+.back-button {
+    padding: 8px;
+    border: none;
+    background: transparent;
+    border-radius: 9999px;
+    cursor: pointer;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-button:hover {
+    background-color: #f3f4f6;
+}
+
+/* Path Text Styles */
+.path-text {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* Header Navigation Container */
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .back-button {
+        padding: 6px;
+    }
+
+    .path-text {
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Active Tags Container */
+.active-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 8px;
+    min-height: 32px;
+}
+
+.active-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background-color: #7c3aed;
+    color: white;
+    border-radius: 16px;
+    font-size: 12px;
+    transition: all 0.2s;
+}
+
+.active-tag .remove-tag {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.2s;
+}
+
+.active-tag .remove-tag:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design for Active Tags */
+@media (max-width: 640px) {
+    .active-tag {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+}
+
+
+

@@ -469,19 +469,6 @@ kbd {
   background: #555;
 }
 
-/* Dark mode scrollbar */
-body.dark ::-webkit-scrollbar-track {
-  background: #2d3748;
-}
-
-body.dark ::-webkit-scrollbar-thumb {
-  background: #4a5568;
-}
-
-body.dark ::-webkit-scrollbar-thumb:hover {
-  background: #718096;
-}
-
 /* Animations */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -531,17 +518,6 @@ body.dark ::-webkit-scrollbar-thumb:hover {
 .nav-item:hover .nav-icon {
   transform: translateX(2px);
   transition: transform 0.2s ease;
-}
-
-/* Improved focus styles for dark mode */
-body.dark .nav-item:focus,
-body.dark .add-link-button:focus,
-body.dark #searchInput:focus,
-body.dark .card-actions button:focus,
-body.dark .close-modal:focus,
-body.dark .cancel-button:focus,
-body.dark .save-button:focus {
-  outline-color: #8b5cf6;
 }
 
 /* Custom styles for specific elements */
@@ -841,3 +817,5 @@ to {
     transform: translateY(0);
 }
 }
+
+
